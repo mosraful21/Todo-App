@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.low-priority {
+  background-color: rgba(255, 0, 0, 0.25);
+}
+
+.medium-priority {
+  background-color: rgba(255, 255, 0, 0.4);
+}
+
+.high-priority {
+  background-color: rgba(0, 128, 0, 0.4);
+}
