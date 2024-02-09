@@ -11,10 +11,21 @@ const AddTask = () => {
 
   const onSubmit = (data) => {
     const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    const updatedTasks = [...existingTasks, data];
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
 
-    // Show SweetAlert notification
+    // Generate a unique task ID
+    const taskId = Date.now();
+
+    // Create a task object with ID, name, and priority
+    const task = {
+      taskId: taskId,
+      taskName: data.taskName,
+      priority: data.priority,
+    };
+    // Update tasks array with the new task
+    const updatedTasks = [...existingTasks, task];
+    
+    // Store local storage
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     Swal.fire({
       position: "top-center",
       icon: "success",
@@ -29,9 +40,12 @@ const AddTask = () => {
 
   return (
     <section className="py-10">
-      <form onSubmit={handleSubmit(onSubmit)} className="bg-slate-50 p-4">
-        <div className="grid grid-cols-2 gap-4 ">
-          {/* Porduct Name */}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-slate-50 p-4 box-shadow"
+      >
+        <div className="grid md:grid-cols-2 gap-x-4 gap-y-2">
+          {/* Task Name */}
           <div className="space-y-1">
             <label className="font-semibold flex items-center">
               Task Name<span className="text-orange-500">*</span>
@@ -48,7 +62,7 @@ const AddTask = () => {
             />
           </div>
 
-          {/* priority */}
+          {/* Priority */}
           <div className="space-y-1">
             <label className="font-semibold flex items-center">
               Priority<span className="text-orange-500">*</span>

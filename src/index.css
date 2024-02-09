@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.box-shadow {
+  border-radius: 8px;
+  box-shadow: 1px 2px 3px 1px rgba(128, 128, 128, 0.669);
+}
+
 .low-priority {
   background-color: rgba(255, 0, 0, 0.25);
 }
@@ -12,4 +17,21 @@
 
 .high-priority {
   background-color: rgba(0, 128, 0, 0.4);
+}
+
+.button {
+  @apply border text-white px-3 font-semibold;
+}
+
+.button:first-child {
+  background-color: #2962ff;
+}
+.button:nth-child(2) {
+  background-color: rgba(0, 128, 0, 0.82);
+}
+.button:nth-child(3) {
+  background-color: rgb(133, 133, 2);
+}
+.button:nth-child(4) {
+  background-color: rgba(255, 0, 0, 0.664);
 }

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 
 const EditTask = () => {
   const { id } = useParams();
+  const taskId = parseInt(id);
   const {
     register,
     formState: { errors },
@@ -15,22 +16,29 @@ const EditTask = () => {
 
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    const task = storedTasks[id];
-    setValue("taskName", task.taskName);
-    setValue("priority", task.priority);
-  }, [id, setValue]);
+    const task = storedTasks.find((task) => task.taskId === taskId);
+    if (task) {
+      setValue("taskName", task.taskName);
+      setValue("priority", task.priority);
+    }
+  }, [taskId, setValue]);
 
   // Update task data
   const onSubmit = (data) => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    storedTasks[id] = data;
-    localStorage.setItem("tasks", JSON.stringify(storedTasks));
+    const updatedTasks = storedTasks.map((task) => {
+      if (task.taskId === taskId) {
+        return { ...task, taskName: data.taskName, priority: data.priority };
+      }
+      return task;
+    });
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
 
     // Show SweetAlert notification
     Swal.fire({
       position: "top-center",
       icon: "success",
-      title: "Your task has been Update!",
+      title: "Your task has been Updated!",
       showConfirmButton: false,
       timer: 1500,
     }).then(() => {
