@@ -42,7 +42,7 @@ const EditTask = () => {
       showConfirmButton: false,
       timer: 1500,
     }).then(() => {
-      navigate("/");
+      navigate("/list");
     });
   };
 
